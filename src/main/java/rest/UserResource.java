@@ -3,7 +3,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.User;
-import facades.FacadeExample;
+import facades.UserFacade;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -27,12 +27,12 @@ import utils.SetupTestUsers;
 /**
  * @author lam@cphbusiness.dk
  */
-@Path("info")
-public class DemoResource {
+@Path("users")
+public class UserResource {
     
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final ExecutorService ES = Executors.newCachedThreadPool();
-    private static final FacadeExample FACADE = FacadeExample.getFacadeExample(EMF);
+    private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static String cachedResponse;
     @Context
@@ -81,21 +81,6 @@ public class DemoResource {
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
     
-    @Path("parrallel")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getStarWarsParrallel() throws InterruptedException, ExecutionException, TimeoutException {
-        String result = fetcher.StarWarsFetcher.responseFromExternalServersParrallel(ES, GSON);
-        cachedResponse = result;
-        return result;
-    }
-
-    @Path("cached")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getStarWarsCached() throws InterruptedException, ExecutionException, TimeoutException {
-        return cachedResponse;
-    }
     
     @Path("setUpUsers")
     @GET
@@ -104,23 +89,6 @@ public class DemoResource {
         SetupTestUsers.setUpUsers();
     }
     
-    @Path("planets")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getPlanets() throws InterruptedException, ExecutionException, TimeoutException, IOException {
-        String result = fetcher.StarWarsPlanetFetcher.responseFromExternalServersSequential(ES, GSON);
-        cachedResponse = result;
-        return result;
-    }
-    
-    @Path("countries")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getCountries() throws InterruptedException, ExecutionException, TimeoutException, IOException {
-        String result = fetcher.CountriesFetcher.responseFromExternalServersSequential(ES, GSON);
-        cachedResponse = result;
-        return result;
-    }
     
     
     
