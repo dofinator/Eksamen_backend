@@ -85,7 +85,7 @@ public class UserFacade {
 
     }
 
-    public BookingDTO bookHotel(BookingDTO bookingDTO, String userName, String hotelId) throws InterruptedException, ExecutionException, TimeoutException {
+    public BookingDTO bookHotel(BookingDTO bookingDTO, String hotelId) throws InterruptedException, ExecutionException, TimeoutException {
         EntityManager em = emf.createEntityManager();
 
         Hotel hotel;
@@ -99,7 +99,7 @@ public class UserFacade {
         System.out.println("price" + hotel.getPricePrNight());
         booking.setHotel(hotel);
 
-        User user = em.find(User.class, userName);
+        User user = em.find(User.class, bookingDTO.userName);
 
         user.addBookings(booking);
 

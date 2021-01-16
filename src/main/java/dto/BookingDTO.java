@@ -13,12 +13,15 @@ import entities.Hotel;
  * @author chris
  */
 public class BookingDTO {
+    
+    public String userName;
     public String startDate;
     public int nights;
     public String pricePrNight;
+    
 
     public BookingDTO(Booking booking) {
-        
+        this.userName = booking.getUser().getUserName();
         this.startDate = booking.getStartDate();
         this.nights = booking.getNights();
         this.pricePrNight = booking.getPricePrNight();
