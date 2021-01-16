@@ -4,6 +4,7 @@ package dto;
 import entities.Booking;
 import entities.CreditCard;
 import entities.User;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,8 +15,8 @@ public class UserDTO {
     public String fullName;
     public String email;
     public String phone;
-    public List<CreditCardDTO> creditCards;
-    public List<BookingDTO> bookings;
+    public List<CreditCardDTO> creditCards = new ArrayList();
+    public List<BookingDTO> bookings = new ArrayList();
 
     public UserDTO(User user) {
         this.userName = user.getUserName();

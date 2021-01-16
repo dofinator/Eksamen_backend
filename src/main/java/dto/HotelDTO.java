@@ -19,7 +19,7 @@ public class HotelDTO {
     public String name;
     public String address;
     public String phone;
-    public int pricePrNight;
+    public String price;
     public List<BookingDTO> bookings;
 
     public HotelDTO(Hotel hotel) {
@@ -27,7 +27,7 @@ public class HotelDTO {
         this.name = hotel.getName();
         this.address = hotel.getAddress();
         this.phone = hotel.getPhone();
-        this.pricePrNight = hotel.getPricePrNight();
+        this.price = hotel.getPricePrNight();
         for (Booking booking : hotel.getBookings()) {
             bookings.add(new BookingDTO(booking));
         }

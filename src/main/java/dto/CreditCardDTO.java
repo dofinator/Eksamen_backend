@@ -12,18 +12,16 @@ import entities.CreditCard;
  * @author chris
  */
 public class CreditCardDTO {
-    
-    public long id;
+
     public String cardType;
     public String cardNumber;
-    private String expDate;
+    public String expDate;
 
     public CreditCardDTO(CreditCard card) {
-        this.id = card.getId();
+
         this.cardType = card.getCardType();
         this.cardNumber = card.getCardNumber();
         this.expDate = card.getExpDate();
     }
-    
-    
+
 }

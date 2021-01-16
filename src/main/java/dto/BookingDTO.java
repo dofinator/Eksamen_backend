@@ -6,20 +6,19 @@
 package dto;
 
 import entities.Booking;
+import entities.Hotel;
 
 /**
  *
  * @author chris
  */
 public class BookingDTO {
-    
-    public long id;
     public String startDate;
-    public String nights;
-    public int pricePrNight;
+    public int nights;
+    public String pricePrNight;
 
     public BookingDTO(Booking booking) {
-        this.id = booking.getId();
+        
         this.startDate = booking.getStartDate();
         this.nights = booking.getNights();
         this.pricePrNight = booking.getPricePrNight();

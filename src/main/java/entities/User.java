@@ -21,50 +21,51 @@ import org.mindrot.jbcrypt.BCrypt;
 @Table(name = "users")
 public class User implements Serializable {
 
-  private static final long serialVersionUID = 1L;
-  @Id
-  @Basic(optional = false)
-  @NotNull
-  @Column(name = "user_name", length = 25)
-  private String userName;
-  @Basic(optional = false)
-  @NotNull
-  @Size(min = 1, max = 255)
-  @Column(name = "user_pass")
-  private String userPass;
-  @JoinTable(name = "user_roles", joinColumns = {
-    @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
-    @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
-  @ManyToMany
-  private List<Role> roleList = new ArrayList<>();
-  
-  private String fullName;
-  private String email;
-  private String phone;
-  @OneToMany(mappedBy = "user",cascade = CascadeType.PERSIST)
-  private List<CreditCard> creditCards;
-  @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-  private List<Booking> bookings;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "user_name", length = 25)
+    private String userName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "user_pass")
+    private String userPass;
+    @JoinTable(name = "user_roles", joinColumns = {
+        @JoinColumn(name = "user_name", referencedColumnName = "user_name")}, inverseJoinColumns = {
+        @JoinColumn(name = "role_name", referencedColumnName = "role_name")})
+    @ManyToMany
+    private List<Role> roleList = new ArrayList<>();
 
-  public List<String> getRolesAsStrings() {
-    if (roleList.isEmpty()) {
-      return null;
-    }
-    List<String> rolesAsStrings = new ArrayList<>();
-    roleList.forEach((role) -> {
-        rolesAsStrings.add(role.getRoleName());
-      });
-    return rolesAsStrings;
-  }
+    private String fullName;
+    private String email;
+    private String phone;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<CreditCard> creditCards;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    private List<Booking> bookings;
 
-  public User() {}
-
-  //TODO Change when password is hashed
-   public boolean verifyPassword(String pw){
-        return(BCrypt.checkpw(pw, this.userPass));
+    public List<String> getRolesAsStrings() {
+        if (roleList.isEmpty()) {
+            return null;
+        }
+        List<String> rolesAsStrings = new ArrayList<>();
+        roleList.forEach((role) -> {
+            rolesAsStrings.add(role.getRoleName());
+        });
+        return rolesAsStrings;
     }
 
-    public User(String userName, String userPass, String fullName, String email, String phone, List<CreditCard> creditCards, List<Booking> bookings) {
+    public User() {
+    }
+
+    //TODO Change when password is hashed
+    public boolean verifyPassword(String pw) {
+        return (BCrypt.checkpw(pw, this.userPass));
+    }
+
+    public User(String userName, String userPass, String fullName, String email, String phone) {
         this.userName = userName;
         this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
         this.fullName = fullName;
@@ -74,33 +75,33 @@ public class User implements Serializable {
         this.bookings = new ArrayList();
     }
 
-  public String getUserName() {
-    return userName;
-  }
+    public String getUserName() {
+        return userName;
+    }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-  public String getUserPass() {
-    return this.userPass;
-  }
+    public String getUserPass() {
+        return this.userPass;
+    }
 
-  public void setUserPass(String userPass) {
-    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-  }
+    public void setUserPass(String userPass) {
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+    }
 
-  public List<Role> getRoleList() {
-    return roleList;
-  }
+    public List<Role> getRoleList() {
+        return roleList;
+    }
 
-  public void setRoleList(List<Role> roleList) {
-    this.roleList = roleList;
-  }
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
 
-  public void addRole(Role userRole) {
-    roleList.add(userRole);
-  }
+    public void addRole(Role userRole) {
+        roleList.add(userRole);
+    }
 
     public String getFullName() {
         return fullName;
@@ -131,8 +132,8 @@ public class User implements Serializable {
     }
 
     public void AddCreditCard(CreditCard card) {
-        if(card != null){
-            this.creditCards.add(card);
+        this.creditCards.add(card);
+        if (card != null) {
             card.setUser(this);
         }
     }
@@ -141,14 +142,11 @@ public class User implements Serializable {
         return bookings;
     }
 
-     public void addBookings(Booking booking) {
-        if(booking != null){
+    public void addBookings(Booking booking) {
+        if (booking != null) {
             this.bookings.add(booking);
             booking.setUser(this);
         }
     }
-  
-  
-  
 
 }
