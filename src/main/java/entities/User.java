@@ -64,12 +64,15 @@ public class User implements Serializable {
         return(BCrypt.checkpw(pw, this.userPass));
     }
 
-  public User(String userName, String userPass) {
-    this.userName = userName;
-
-    this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
-  }
-
+    public User(String userName, String userPass, String fullName, String email, String phone, List<CreditCard> creditCards, List<Booking> bookings) {
+        this.userName = userName;
+        this.userPass = BCrypt.hashpw(userPass, BCrypt.gensalt());
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.creditCards = new ArrayList();
+        this.bookings = new ArrayList();
+    }
 
   public String getUserName() {
     return userName;
@@ -98,5 +101,54 @@ public class User implements Serializable {
   public void addRole(Role userRole) {
     roleList.add(userRole);
   }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public List<CreditCard> getCreditCards() {
+        return creditCards;
+    }
+
+    public void AddCreditCard(CreditCard card) {
+        if(card != null){
+            this.creditCards.add(card);
+            card.setUser(this);
+        }
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+     public void addBookings(Booking booking) {
+        if(booking != null){
+            this.bookings.add(booking);
+            booking.setUser(this);
+        }
+    }
+  
+  
+  
 
 }
