@@ -1,7 +1,6 @@
 package facades;
 
 import utils.EMF_Creator;
-import entities.RenameMe;
 import entities.Role;
 import entities.User;
 import javax.persistence.EntityManager;
@@ -17,7 +16,7 @@ import security.errorhandling.AuthenticationException;
 
 //Uncomment the line below, to temporarily disable this test
 @Disabled
-public class FacadeExampleTest {
+public class UserFacadeTest {
 
     private static EntityManagerFactory emf;
     private static UserFacade facade;
@@ -25,7 +24,7 @@ public class FacadeExampleTest {
     private static User admin;
     private static User both;
 
-    public FacadeExampleTest() {
+    public UserFacadeTest() {
     }
 
     @BeforeAll
