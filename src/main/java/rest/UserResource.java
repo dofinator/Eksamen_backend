@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
@@ -61,6 +62,24 @@ public class UserResource {
         } finally {
             em.close();
         }
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("hotels")
+    public String allHotels() throws InterruptedException, ExecutionException, TimeoutException {
+        String result = fetcher.HotelFetcher.fetchAllHotels(ES, GSON);
+        cachedResponse = result;
+        return result;
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("hotel/{id}")
+    public String getHotelById(@PathParam("id") String id) throws InterruptedException, ExecutionException, TimeoutException {
+        String result = fetcher.HotelFetcher.fetchHotelById(ES, GSON, id);
+        cachedResponse = result;
+        return result;
     }
 
     @GET

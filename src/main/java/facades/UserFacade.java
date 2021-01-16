@@ -1,6 +1,8 @@
 package facades;
 
+import dto.FetchHotelDTO;
 import entities.User;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import security.errorhandling.AuthenticationException;
@@ -42,5 +44,9 @@ public class UserFacade {
         }
         return user;
     }
+    
+    
+    
+    
 
 }
