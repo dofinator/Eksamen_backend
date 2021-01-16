@@ -29,6 +29,58 @@ public class CreditCard implements Serializable {
     @ManyToOne
     private User user;
 
-  
+    public CreditCard() {
+    }
+
+    public CreditCard(String cardType, String cardNumber, String expDate) {
+        this.cardType = cardType;
+        this.cardNumber = cardNumber;
+        this.expDate = expDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(String expDate) {
+        this.expDate = expDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
+
+    
+    
 
 }

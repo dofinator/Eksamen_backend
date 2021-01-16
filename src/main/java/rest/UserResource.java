@@ -22,7 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
-import utils.SetupTestUsers;
+//import utils.SetupTestUsers;
 
 /**
  * @author lam@cphbusiness.dk
@@ -82,12 +82,12 @@ public class UserResource {
     }
     
     
-    @Path("setUpUsers")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public void setUpUsers() {
-        SetupTestUsers.setUpUsers();
-    }
+//    @Path("setUpUsers")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public void setUpUsers() {
+//        SetupTestUsers.setUpUsers();
+//    }
     
     
     
