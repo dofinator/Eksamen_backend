@@ -25,8 +25,8 @@ public class Booking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String startDate;
-    private String nights;
-    private int pricePrNight;
+    private int nights;
+    private String pricePrNight;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Hotel hotel;
     @ManyToOne
@@ -35,8 +35,7 @@ public class Booking implements Serializable {
     public Booking() {
     }
 
-    public Booking(Long id, String startDate, String nights, int pricePrNight, Hotel hotel) {
-        this.id = id;
+    public Booking(String startDate, int nights, String pricePrNight) {
         this.startDate = startDate;
         this.nights = nights;
         this.pricePrNight = pricePrNight;
@@ -59,19 +58,19 @@ public class Booking implements Serializable {
         this.startDate = startDate;
     }
 
-    public String getNights() {
+    public int getNights() {
         return nights;
     }
 
-    public void setNights(String nights) {
+    public void setNights(int nights) {
         this.nights = nights;
     }
 
-    public int getPricePrNight() {
+    public String getPricePrNight() {
         return pricePrNight;
     }
 
-    public void setPricePrNight(int pricePrNight) {
+    public void setPricePrNight(String pricePrNight) {
         this.pricePrNight = pricePrNight;
     }
 

@@ -28,20 +28,22 @@ public class Hotel implements Serializable {
     private Long id;
     private String name;
     private String address;
+    private String email;
     private String phone;
-    private int pricePrNight;
+    private String price;
     @OneToMany(mappedBy = "hotel")
     private List<Booking> bookings;
 
     public Hotel() {
     }
 
-    public Hotel(Long id, String name, String address, String phone, int pricePrNight) {
+    public Hotel(Long id, String name, String address, String email, String phone, String pricePrNight) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.email = email;
         this.phone = phone;
-        this.pricePrNight = pricePrNight;
+        this.price = pricePrNight;
         this.bookings = new ArrayList();
     }
 
@@ -77,12 +79,12 @@ public class Hotel implements Serializable {
         this.phone = phone;
     }
 
-    public int getPricePrNight() {
-        return pricePrNight;
+    public String getPricePrNight() {
+        return price;
     }
 
-    public void setPricePrNight(int pricePrNight) {
-        this.pricePrNight = pricePrNight;
+    public void setPricePrNight(String pricePrNight) {
+        this.price = pricePrNight;
     }
 
     public List<Booking> getBookings() {
@@ -90,12 +92,18 @@ public class Hotel implements Serializable {
     }
 
     public void setBookings(Booking booking) {
-        if(booking != null){
+        if (booking != null) {
             this.bookings.add(booking);
             booking.setHotel(this);
         }
     }
-    
-    
-    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
