@@ -40,6 +40,7 @@ public class Booking implements Serializable {
         this.nights = nights;
         this.pricePrNight = pricePrNight;
         this.hotel = hotel;
+        
     }
 
     public Long getId() {

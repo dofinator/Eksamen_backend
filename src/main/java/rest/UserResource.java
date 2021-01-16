@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.BookingDTO;
 import dto.UserDTO;
 import entities.User;
 import facades.UserFacade;
@@ -21,6 +22,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
@@ -34,7 +36,7 @@ import utils.EMF_Creator;
  */
 @Path("users")
 public class UserResource {
-    
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final ExecutorService ES = Executors.newCachedThreadPool();
     private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
@@ -60,14 +62,14 @@ public class UserResource {
 
         EntityManager em = EMF.createEntityManager();
         try {
-            TypedQuery<User> query = em.createQuery ("select u from User u",entities.User.class);
+            TypedQuery<User> query = em.createQuery("select u from User u", entities.User.class);
             List<User> users = query.getResultList();
             return "[" + users.size() + "]";
         } finally {
             em.close();
         }
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("hotels")
@@ -76,7 +78,7 @@ public class UserResource {
         cachedResponse = result;
         return result;
     }
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("hotel/{id}")
@@ -103,7 +105,17 @@ public class UserResource {
         String thisuser = securityContext.getUserPrincipal().getName();
         return "{\"msg\": \"Hello to (admin) User: " + thisuser + "\"}";
     }
-    
+
+    @Path("bookhotel/{id}")
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response bookHotel(@PathParam("id") String id, String booking) throws InterruptedException, ExecutionException, TimeoutException {
+        BookingDTO bookingDTO = GSON.fromJson(booking, BookingDTO.class);
+        bookingDTO = FACADE.bookHotel(bookingDTO, id);
+        return Response.ok(bookingDTO).build();
+    }
+
     @Path("register")
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -113,15 +125,12 @@ public class UserResource {
         u = FACADE.registerUser(u);
         return Response.ok(u).build();
     }
-    
-//    @Path("setUpUsers")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public void setUpUsers() {
-//        SetupTestUsers.setUpUsers();
-//    }
-    
-    
-    
-    
+
+    @Path("setupusers")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public void setUpUsers() {
+        utils.SetupTestUsers.setUpUsers();
+    }
+
 }

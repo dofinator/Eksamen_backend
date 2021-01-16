@@ -112,9 +112,11 @@ public class UserFacadeTest {
 
         Booking booking = new Booking("22-12-2019", 2, hotel.getPricePrNight());
 
+        u1.addBookings(booking);
+
         BookingDTO bookingDTO1 = new BookingDTO(booking);
-        
-        BookingDTO bookingDTO2 = facade.bookHotel(bookingDTO1, u1.getUserName(), id);
+
+        BookingDTO bookingDTO2 = facade.bookHotel(bookingDTO1, id);
 
         assertEquals(bookingDTO2.startDate, "22-12-2019");
     }

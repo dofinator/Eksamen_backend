@@ -32,15 +32,18 @@ public class tester {
         ExecutorService ES = Executors.newCachedThreadPool();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        User user = new User("register", "register", "Register manden", "register@reg.com", "45451424");
-        CreditCard card = new CreditCard("dankort", "4321", "20/2001");
-
-        user.AddCreditCard(card);
-
-        UserDTO userDto = facade.registerUser(new UserDTO(user));
-
-        System.out.println(userDto.email);
-
+//        User user = new User("register1", "register1", "Register manden", "register@reg.com", "45451424");
+//        CreditCard card = new CreditCard("dankort1", "4321", "20/2001");
+//
+//        user.AddCreditCard(card);
+//
+//        UserDTO userDto = facade.registerUser(new UserDTO(user));
+//
+//        System.out.println(userDto.email);
+//
+//        em.getTransaction().begin();
+//        em.persist(user);
+//        em.getTransaction().commit();
         String id = "4042";
 
         String hotelDTO = fetcher.HotelFetcher.fetchHotelById(ES, gson, id);
@@ -50,7 +53,7 @@ public class tester {
 
         BookingDTO bookingDTO1 = new BookingDTO(booking);
 
-        BookingDTO bookingDTO2 = facade.bookHotel(bookingDTO1, user.getUserName(), id);
+        BookingDTO bookingDTO2 = facade.bookHotel(bookingDTO1, id);
 
         System.out.println(bookingDTO2.pricePrNight);
 
