@@ -36,6 +36,7 @@ public class CreditCard implements Serializable {
         this.cardType = cardType;
         this.cardNumber = cardNumber;
         this.expDate = expDate;
+        
     }
 
     public Long getId() {

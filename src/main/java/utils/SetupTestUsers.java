@@ -32,11 +32,9 @@ public class SetupTestUsers {
         
         user1.AddCreditCard(card1);
         user2.AddCreditCard(card2);
-        both.AddCreditCard(card3);
+        
         user1.addRole(userRole);
         user2.addRole(userRole);
-        both.addRole(userRole);
-        both.addRole(adminRole);
         admin.addRole(adminRole);
 
         em.getTransaction().begin();
@@ -44,7 +42,6 @@ public class SetupTestUsers {
         em.persist(adminRole);
         em.persist(user1);
         em.persist(user2);
-        em.persist(both);
         em.persist(admin);
         em.getTransaction().commit();
         

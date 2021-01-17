@@ -33,7 +33,6 @@ public class UserFacade {
     private static final ExecutorService threadPool = Executors.newCachedThreadPool();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-
     private UserFacade() {
     }
 
@@ -93,7 +92,7 @@ public class UserFacade {
         String hotelDTO = fetcher.HotelFetcher.fetchHotelById(threadPool, gson, hotelId);
         hotel = gson.fromJson(hotelDTO, Hotel.class);
 
-        System.out.println(hotel);
+        
         Booking booking = new Booking(bookingDTO.startDate, bookingDTO.nights, hotel.getPricePrNight());
 
         System.out.println("price" + hotel.getPricePrNight());
@@ -102,7 +101,7 @@ public class UserFacade {
         User user = em.find(User.class, bookingDTO.userName);
 
         user.addBookings(booking);
-
+        
         try {
             em.getTransaction().begin();
             em.merge(user);

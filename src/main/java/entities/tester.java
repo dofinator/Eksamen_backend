@@ -49,8 +49,12 @@ public class tester {
         String hotelDTO = fetcher.HotelFetcher.fetchHotelById(ES, gson, id);
         Hotel hotel = gson.fromJson(hotelDTO, Hotel.class);
 
+        User user = new User("user", "user", "user", "user", "user");
+        
         Booking booking = new Booking("22-12-2019", 2, hotel.getPricePrNight());
 
+        user.addBookings(booking);
+        
         BookingDTO bookingDTO1 = new BookingDTO(booking);
 
         BookingDTO bookingDTO2 = facade.bookHotel(bookingDTO1, id);
