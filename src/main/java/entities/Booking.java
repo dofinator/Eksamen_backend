@@ -39,7 +39,6 @@ public class Booking implements Serializable {
         this.startDate = startDate;
         this.nights = nights;
         this.pricePrNight = pricePrNight;
-        this.hotel = hotel;
         
     }
 

@@ -143,8 +143,8 @@ public class User implements Serializable {
     }
 
     public void addBookings(Booking booking) {
+        this.bookings.add(booking);
         if (booking != null) {
-            this.bookings.add(booking);
             booking.setUser(this);
         }
     }

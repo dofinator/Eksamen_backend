@@ -91,9 +91,9 @@ public class Hotel implements Serializable {
         return bookings;
     }
 
-    public void setBookings(Booking booking) {
+    public void addBookings(Booking booking) {
+        this.bookings.add(booking);
         if (booking != null) {
-            this.bookings.add(booking);
             booking.setHotel(this);
         }
     }
